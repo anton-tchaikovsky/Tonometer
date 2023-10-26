@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/height_note">
+
+    <FrameLayout
+        android:id="@+id/systolic_pressure_layout"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/gradient_white_green"
+        app:layout_constraintEnd_toEndOf="@id/line_50"
+        app:layout_constraintStart_toEndOf="@id/line_20" />
+
+    <FrameLayout
+        android:id="@+id/diastolic_pressure_layout"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/gradient_green_white"
+        app:layout_constraintEnd_toEndOf="@id/line_80"
+        app:layout_constraintStart_toEndOf="@id/line_50" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/line_20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.20" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/line_50"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.50" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/line_80"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.80" />
+
+    <TextView
+        android:id="@+id/time_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:alpha="@dimen/alfa_text_view"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/line_20"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tool:text="07:06" />
+
+    <TextView
+        android:id="@+id/pulse_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_small"
+        android:layout_marginEnd="@dimen/margin_small"
+        android:alpha="@dimen/alfa_text_view"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/pulse_image_view"
+        app:layout_constraintTop_toTopOf="parent"
+        tool:text="64" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/pulse_image_view"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        app:srcCompat="@drawable/baseline_favorite_24"
+        android:alpha="@dimen/alfa_image_view"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/pulse_text_view"
+        app:layout_constraintStart_toEndOf="@+id/line_80"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="@dimen/margin_small"
+         />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/divider"
+        android:alpha="@dimen/alfa_image_view"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/line_50"
+        app:layout_constraintStart_toEndOf="@id/line_50"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/systolic_pressure_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/line_50"
+        app:layout_constraintStart_toEndOf="@id/line_20"
+        app:layout_constraintTop_toTopOf="parent"
+        tool:text="127" />
+
+    <TextView
+        android:id="@+id/diastolic_pressure_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/line_80"
+        app:layout_constraintStart_toEndOf="@id/line_50"
+        app:layout_constraintTop_toTopOf="parent"
+        tool:text="93" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

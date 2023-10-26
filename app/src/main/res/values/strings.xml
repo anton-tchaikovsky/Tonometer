@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Tonometer</string>
+    <string name="divider">/</string>
+    <string name="systolic">systolic</string>
+    <string name="diastolic">diastolic</string>
+    <string name="pulse">pulse</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="add">Add</string>
 </resources>

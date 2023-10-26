@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin_large">28dp</dimen>
+    <dimen name="margin_small">4dp</dimen>
+    <dimen name="padding_middle">8dp</dimen>
+    <dimen name="height_note">72dp</dimen>
+    <dimen name="alfa_text_view">0.8</dimen>
+    <dimen name="alfa_image_view">0.55</dimen>
+</resources>
