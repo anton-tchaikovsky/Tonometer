@@ -27,7 +27,10 @@ class TonometerViewModelImpl @Inject constructor(
 
     override fun getTonometerData() {
         viewModelScope.launch {
-            tonometerLiveData.value = mapToViewEntities(repository.getTonometerData())
+            repository.getTonometerData().collect {
+                viewEntities.clear()
+                tonometerLiveData.value = mapToViewEntities(it)
+            }
         }
     }
 
@@ -35,9 +38,9 @@ class TonometerViewModelImpl @Inject constructor(
         if (tonometerMeasurement.size != 3)
             throw IllegalStateException()
         val tonometerData = TonometerData(
-            dateProvider.getTodayDate(),
-            dateProvider.getCurrentTime(),
-            TonometerMeasurement(
+            date = dateProvider.getTodayDate(),
+            time = dateProvider.getCurrentTime(),
+            tonometerMeasurement = TonometerMeasurement(
                 checkTonometerMeasurement(tonometerMeasurement[0]),
                 checkTonometerMeasurement(tonometerMeasurement[1]),
                 checkTonometerMeasurement(tonometerMeasurement[2])
@@ -51,19 +54,19 @@ class TonometerViewModelImpl @Inject constructor(
         }
     }
 
-    override fun deleteTonometerData(position: Int) {
-        viewEntities.removeAt(position).also {
-            val tonometerData = TonometerData(
-                it.date,
-                it.tonometerMeasurement?.time ?: throw IllegalStateException(),
-                it.tonometerMeasurement.tonometerMeasurement
-            )
-            viewModelScope.launch {
-                repository.deleteTonometerData(tonometerData)
-            }
+    override fun deleteTonometerData(id: String) {
+        val viewTonometerData = viewEntities.find {
+            it.tonometerMeasurement?.id == id
+        }
+        viewEntities.indexOf(viewTonometerData).let { position ->
+            if (position == -1)
+                throw java.lang.IllegalStateException()
+            viewEntities.removeAt(position)
             if (isLastMeasurementWithThisDate(position))
                 viewEntities.removeAt(position - 1)
-            tonometerLiveData.value = viewEntities
+            viewModelScope.launch {
+                repository.deleteTonometerData(id)
+            }
         }
     }
 
@@ -87,14 +90,13 @@ class TonometerViewModelImpl @Inject constructor(
                 ViewTonometerData(
                     it.date,
                     ViewTonometerMeasurement(
-                        it.time,
-                        it.tonometerMeasurement,
-                        isNorma(it.tonometerMeasurement)
+                        time = it.time,
+                        tonometerMeasurement = it.tonometerMeasurement,
+                        isNorma = isNorma(it.tonometerMeasurement)
                     )
                 )
             )
         }
-        tonometerLiveData.value = viewEntities
     }
 
     private fun mapToViewEntities(entities: List<TonometerData>): List<ViewTonometerData> {
@@ -105,6 +107,7 @@ class TonometerViewModelImpl @Inject constructor(
                 ViewTonometerData(
                     it.date,
                     ViewTonometerMeasurement(
+                        it.id,
                         it.time,
                         it.tonometerMeasurement,
                         isNorma(it.tonometerMeasurement)

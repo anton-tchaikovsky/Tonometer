@@ -8,7 +8,7 @@ import com.gb.tonometer.databinding.ViewDateBinding
 import com.gb.tonometer.databinding.ViewTomometerMeasurementBinding
 import com.gb.tonometer.presentation.view_entity.ViewTonometerData
 
-class TonometerAdapter (private val removeMeasurementClickListener: (Int) -> Unit): RecyclerView.Adapter<RecyclerView.ViewHolder>(), ItemTouchHelperAdapter {
+class TonometerAdapter (private val removeMeasurementClickListener: (String) -> Unit): RecyclerView.Adapter<RecyclerView.ViewHolder>(), ItemTouchHelperAdapter {
 
     private var tonometerDataList: List<ViewTonometerData> = listOf()
 
@@ -65,6 +65,6 @@ class TonometerAdapter (private val removeMeasurementClickListener: (Int) -> Uni
     }
 
     override fun onRemoveItem(position: Int) {
-        removeMeasurementClickListener(position)
+        removeMeasurementClickListener(tonometerDataList[position].tonometerMeasurement?.id ?: throw IllegalStateException())
     }
 }

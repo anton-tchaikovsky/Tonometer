@@ -5,7 +5,12 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 open class TonometerData(
+    val id: String = DEFAULT_ID,
     val date: String,
     val time: String,
     val tonometerMeasurement: TonometerMeasurement
-) : Parcelable
+) : Parcelable{
+    companion object{
+        const val DEFAULT_ID = ""
+    }
+}

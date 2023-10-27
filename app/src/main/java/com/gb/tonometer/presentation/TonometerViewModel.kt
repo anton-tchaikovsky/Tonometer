@@ -10,5 +10,5 @@ interface TonometerViewModel {
 
     fun insertTonometerData(tonometerMeasurement: List<String>)
 
-    fun deleteTonometerData(position: Int)
+    fun deleteTonometerData(id: String)
 }
